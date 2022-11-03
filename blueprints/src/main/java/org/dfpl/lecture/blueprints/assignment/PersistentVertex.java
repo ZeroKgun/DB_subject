@@ -4,10 +4,19 @@ import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
 import com.tinkerpop.blueprints.VertexQuery;
+import org.json.JSONObject;
 
 import java.util.Set;
 
 public class PersistentVertex implements Vertex {
+
+    public String m_id;
+    public JSONObject m_property;
+
+    public PersistentVertex(String id, JSONObject property) {
+        m_id = id;
+        m_property = property;
+    }
 
     @Override
     public Iterable<Edge> getEdges(Direction direction, String... strings) {
