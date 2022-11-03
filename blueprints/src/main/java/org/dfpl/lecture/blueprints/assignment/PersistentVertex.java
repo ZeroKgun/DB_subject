@@ -8,6 +8,10 @@ import com.tinkerpop.blueprints.VertexQuery;
 import java.util.Set;
 
 public class PersistentVertex implements Vertex {
+    private String id;
+    public PersistentVertex(String id){
+        this.id = id;
+    }
 
     @Override
     public Iterable<Edge> getEdges(Direction direction, String... strings) {
@@ -31,12 +35,12 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public <T> T getProperty(String s) {
-        return null;
+        return properties.get(s);
     }
 
     @Override
     public Set<String> getPropertyKeys() {
-        return null;
+        return properties.keySet();
     }
 
     @Override
