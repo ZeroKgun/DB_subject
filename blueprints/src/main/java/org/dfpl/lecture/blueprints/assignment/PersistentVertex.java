@@ -9,6 +9,10 @@ import org.json.JSONObject;
 import java.util.Set;
 
 public class PersistentVertex implements Vertex {
+    private String id;
+    public PersistentVertex(String id){
+        this.id = id;
+    }
 
     public String m_id;
     public JSONObject m_property;
@@ -40,12 +44,12 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public <T> T getProperty(String s) {
-        return null;
+        return properties.get(s);
     }
 
     @Override
     public Set<String> getPropertyKeys() {
-        return null;
+        return properties.keySet();
     }
 
     @Override

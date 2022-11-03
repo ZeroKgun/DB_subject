@@ -7,6 +7,19 @@ import com.tinkerpop.blueprints.Vertex;
 import java.util.Set;
 
 public class PersistentEdge implements Edge {
+    private String id;
+    private Vertex outV;
+    private String label;
+    private Vertex inV;
+
+    public PersistentEdge(String id, Vertex outV, String label, Vertex inV){
+        this.id = id;
+        this.outV = outV;
+        this.label = label;
+        this.inV = inV;
+    }
+
+
     @Override
     public Vertex getVertex(Direction direction) throws IllegalArgumentException {
         return null;
