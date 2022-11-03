@@ -4,12 +4,38 @@ import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 
 public class PersistentGraph implements Graph {
+    Connection connection = null;
+    Statement stmt = null;
+
+    PersistentGraph(String id, String pw, String name) throws SQLException {
+
+        connection =
+                DriverManager.getConnection("jdbc:mariadb://localhost:3306", id, pw);
+
+        stmt = connection.createStatement();
+
+        stmt.executeUpdate("CREATE OR REPLACE DATABASE " + name);
+        stmt.executeUpdate("USE " + name);
+
+
+        stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id INT UNIQUE, property JSON)");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id INT UNIQUE, Vout INT, Vin INT, label VARHCAR(20), property JSON)");
+
+
+    }
 
     @Override
-    public Vertex addVertex(String id) throws IllegalArgumentException {
+    public Vertex addVertex(String id) throws IllegalArgumentException, SQLException {
+
+        stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
+
         return null;
     }
 
