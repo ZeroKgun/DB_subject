@@ -36,7 +36,7 @@ public class PersistentGraph implements Graph {
 
         stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
 
-        return (Vertex)(new PersistentVertex(id, null));
+        return (Vertex)(new PersistentVertex(Integer.parseInt(id), null));
     }
 
     @Override
