@@ -67,6 +67,6 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Object getId() {
-        return null;
+        return m_id;
     }
 }
