@@ -4,15 +4,13 @@ import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Collection;
 
 public class PersistentGraph implements Graph {
     Connection connection = null;
     Statement stmt = null;
+    ResultSet rs = null;
 
     PersistentGraph(String id, String pw, String name) throws SQLException {
 
@@ -32,13 +30,29 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Vertex addVertex(String id) throws IllegalArgumentException {
-        return null;
+    public Vertex addVertex(String id) throws IllegalArgumentException, SQLException {
+
+        stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
+
+        Vertex newVertex = new PersistentVertex(this, id);
+
+        return newVertex;
     }
 
     @Override
-    public Vertex getVertex(String id) {
-        return null;
+    public Vertex getVertex(String id) throws SQLException {
+
+        rs = stmt.executeQuery("SELECT * FROM vertex WHERE id = " + id + ";");
+
+        Vertex newVertex = null;
+
+        while(rs.next()) {
+            int newId = rs.getInt(1);
+
+            newVertex = new PersistentVertex(this, newId);
+        }
+
+        return newVertex;
     }
 
     @Override
@@ -47,13 +61,35 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Collection<Vertex> getVertices() {
-        return null;
+    public Collection<Vertex> getVertices() throws SQLException {
+        ArrayList<Vertex> newVertices = new ArrayList<>();
+
+        rs = stmt.executeQuery("SELECT * FROM vertex;");
+
+        while(rs.next()) {
+            int newId = rs.getInt(1);
+            Vertex newVertex = new PersistentVertex(this, newId);
+
+            newVertices.add(newVertex);
+        }
+
+        return newVertices;
     }
 
     @Override
-    public Collection<Vertex> getVertices(String key, Object value) {
-        return null;
+    public Collection<Vertex> getVertices(String key, Object value) throws SQLException {
+        ArrayList<Vertex> newVertices = new ArrayList<>();
+
+        rs = stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
+
+        while(rs.next()) {
+            int newId = rs.getInt(1);
+            Vertex newVertex = new PersistentVertex(this, newId);
+
+            newVertices.add(newVertex);
+        }
+
+        return newVertices;
     }
 
     @Override
