@@ -26,17 +26,14 @@ public class PersistentGraph implements Graph {
 
 
         stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id INT UNIQUE, property JSON)");
-        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id INT UNIQUE, Vout INT, Vin INT, label VARHCAR(20), property JSON)");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout INT, Vin INT, label VARHCAR(20), property JSON)");
 
 
     }
 
     @Override
-    public Vertex addVertex(String id) throws IllegalArgumentException, SQLException {
-
-        stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
-
-        return (Vertex)(new PersistentVertex(Integer.parseInt(id), null));
+    public Vertex addVertex(String id) throws IllegalArgumentException {
+        return null;
     }
 
     @Override

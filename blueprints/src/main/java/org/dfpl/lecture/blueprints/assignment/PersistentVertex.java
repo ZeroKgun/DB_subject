@@ -1,72 +1,60 @@
 package org.dfpl.lecture.blueprints.assignment;
 
-import com.tinkerpop.blueprints.Direction;
-import com.tinkerpop.blueprints.Edge;
-import com.tinkerpop.blueprints.Vertex;
-import com.tinkerpop.blueprints.VertexQuery;
-import org.json.JSONObject;
+import com.tinkerpop.blueprints.revised.Direction;
+import com.tinkerpop.blueprints.revised.Edge;
+import com.tinkerpop.blueprints.revised.Vertex;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class PersistentVertex implements Vertex {
-
-    private int m_id;
-    private JSONObject m_property;
-
-    public PersistentVertex(int id, JSONObject property) {
-        m_id = id;
-        m_property = property;
-    }
-
     @Override
-    public Iterable<Edge> getEdges(Direction direction, String... strings) {
+    public String getId() {
         return null;
     }
 
     @Override
-    public Iterable<Vertex> getVertices(Direction direction, String... strings) {
+    public Object getProperty(String key) {
         return null;
-    }
-
-    @Override
-    public VertexQuery query() {
-        return null;
-    }
-
-    @Override
-    public Edge addEdge(String s, Vertex vertex) {
-        return null;
-    }
-
-    @Override
-    public <T> T getProperty(String s) {
-        return null;
-                //properties.get(s);
     }
 
     @Override
     public Set<String> getPropertyKeys() {
         return null;
-                //properties.keySet();
     }
 
     @Override
-    public void setProperty(String s, Object o) {
+    public void setProperty(String key, Object value) {
 
     }
 
     @Override
-    public <T> T removeProperty(String s) {
+    public Object removeProperty(String key) {
+        return null;
+    }
+
+    @Override
+    public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException {
+        return null;
+    }
+
+    @Override
+    public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException {
+        return null;
+    }
+
+    @Override
+    public Collection<Vertex> getTwoHopVertices(Direction direction, String... labels) throws IllegalArgumentException {
+        return null;
+    }
+
+    @Override
+    public Collection<Vertex> getVertices(Direction direction, String key, Object value, String... labels) throws IllegalArgumentException {
         return null;
     }
 
     @Override
     public void remove() {
 
-    }
-
-    @Override
-    public Object getId() {
-        return m_id;
     }
 }

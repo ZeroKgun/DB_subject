@@ -1,6 +1,5 @@
 package com.tinkerpop.blueprints.revised;
 
-import java.sql.SQLException;
 import java.util.Collection;
 
 /**
@@ -21,7 +20,7 @@ public interface Graph {
 	 * @return the newly created vertex or the existing vertex, v(id)
 	 * @throws IllegalArgumentException is thrown if id contains '|'
 	 */
-	public Vertex addVertex(String id) throws IllegalArgumentException, SQLException;
+	public Vertex addVertex(String id) throws IllegalArgumentException;
 
 	/**
 	 * Return the vertex referenced by the provided object identifier. If no vertex
