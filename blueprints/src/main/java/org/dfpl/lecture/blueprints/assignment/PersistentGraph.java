@@ -107,7 +107,7 @@ public class PersistentGraph implements Graph {
         String edge_id = outVertex + "|" + label + "|" + inVertex;
         stmt.executeUpdate("INSERT INTO vertex VALUES(" +edge_id+","+ outVertex + ","+ inVertex + "," + label + ",null)");
 
-        return (Edge) new PersistentEdge(this, outVertex, label, inVertex);
+        return (Edge) new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
     }
 
     @Override
@@ -116,7 +116,7 @@ public class PersistentGraph implements Graph {
         ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
         if (rs.next())
         {
-            return (Edge) new PersistentEdge(this, outVertex, label, inVertex);
+            return (Edge) new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
         }
         else
             return null;
