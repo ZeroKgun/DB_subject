@@ -18,6 +18,10 @@ public class PersistentVertex implements Vertex {
     public PersistentVertex(PersistentGraph g, String id) throws SQLException {
         this.g = g;
         this.id = id;
+<<<<<<< HEAD
+=======
+
+>>>>>>> bdcf7445c255283818d10719d91eb365fb83685c
     }
 
     @Override
