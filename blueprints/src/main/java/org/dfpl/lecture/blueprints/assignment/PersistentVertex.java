@@ -3,6 +3,7 @@ package org.dfpl.lecture.blueprints.assignment;
 import com.tinkerpop.blueprints.revised.Direction;
 import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Vertex;
+import org.json.JSONObject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,11 @@ public class PersistentVertex implements Vertex {
     public PersistentVertex(PersistentGraph g, String id) throws SQLException {
         this.g = g;
         this.id = id;
+<<<<<<< HEAD
+=======
+
+        //this.g.stmt.executeUpdate("INSERT INTO vertex VALUE(" + id + ", null);");
+>>>>>>> 31e3790480c1f1fd9c122e983eff88a89ec55e19
     }
 
     @Override
@@ -25,31 +31,53 @@ public class PersistentVertex implements Vertex {
     }
 
     @Override
-    public Object getProperty(String key) {
-        return null;
+    public Object getProperty(String key) throws SQLException {
+        ResultSet rs;
+        String properties="";
+        String result = "";
+        JSONObject r_properties = null;
+        rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id =" +this.id +";");
+        while(rs.next()) {
+            properties = rs.getString(2);
+            r_properties = new JSONObject(properties);
+        }
+        //Object r_result = r_properties.get(key);
+        if(r_properties.isNull(key)){
+            return null;
+        }
+        else
+            return String.valueOf(r_properties.get(key));
     }
 
     @Override
     public Set<String> getPropertyKeys() throws SQLException {
-        Set<String> keySet = new HashSet<>();
-        ResultSet rs = g.stmt.executeQuery("SELECT JSON_KEYS(property) FROM vertex WHERE id = " + this.id +";");
-        String a = rs.getString(1);
-        String[] arr = a.split("\"");
+        ResultSet rs;
+        String properties="";
+        JSONObject r_properties = null;
+        rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + this.id + ";");
 
-        for(int i =0;i<arr.length;i++){
-            if(i%2==1){
-                keySet.add(arr[i]);
-            }
+        while(rs.next()) {
+            properties = rs.getString(2);
+            r_properties = new JSONObject(properties);
         }
+        return r_properties.keySet();
 
-        return keySet;
     }
 
     @Override
     public void setProperty(String key, Object value) throws SQLException {
         //s : id / o : jsonobject
-        g.stmt.executeUpdate("UPDATE vertex SET property = '" + value + "' where id = " + key);
-
+        ResultSet rs;
+        rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id ="+this.id);
+        while(rs.next())
+        {
+            if(rs.getString(2) == null) {
+                g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = " + this.id);
+            }
+            else {
+                g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$."+key+"','"+value+"') WHERE id = " + this.id);
+            }
+        }
     }
 
     @Override

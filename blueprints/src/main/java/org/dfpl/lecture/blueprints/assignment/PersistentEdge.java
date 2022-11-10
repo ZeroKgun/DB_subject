@@ -39,7 +39,7 @@ public class PersistentEdge implements Edge {
     @Override
     public String getLabel() {
 
-        return null;
+        return this.label;
     }
 
     @Override
@@ -49,7 +49,11 @@ public class PersistentEdge implements Edge {
 
     @Override
     public String getId() {
+<<<<<<< HEAD
         return outVertex + "|" + label + "|" +  inVertex;
+=======
+        return this.id;
+>>>>>>> 31e3790480c1f1fd9c122e983eff88a89ec55e19
     }
 
     @Override

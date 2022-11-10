@@ -122,7 +122,9 @@ public class PersistentGraph implements Graph {
 
     @Override
     public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException {
+
         String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
+
         ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
         if (rs.next())
         {
