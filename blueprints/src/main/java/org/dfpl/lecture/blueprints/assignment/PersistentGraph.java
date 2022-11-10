@@ -48,7 +48,7 @@ public class PersistentGraph implements Graph {
         Vertex newVertex = null;
 
         while(rs.next()) {
-            int newId = rs.getInt(1);
+            String newId = rs.getString(1);
 
             newVertex = new PersistentVertex(this, newId);
         }
@@ -68,7 +68,7 @@ public class PersistentGraph implements Graph {
         rs = stmt.executeQuery("SELECT * FROM vertex;");
 
         while(rs.next()) {
-            int newId = rs.getInt(1);
+            String newId = rs.getString(1);
             Vertex newVertex = new PersistentVertex(this, newId);
 
             newVertices.add(newVertex);
@@ -84,7 +84,7 @@ public class PersistentGraph implements Graph {
         rs = stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
 
         while(rs.next()) {
-            int newId = rs.getInt(1);
+            String newId = rs.getString(1);
             Vertex newVertex = new PersistentVertex(this, newId);
 
             newVertices.add(newVertex);

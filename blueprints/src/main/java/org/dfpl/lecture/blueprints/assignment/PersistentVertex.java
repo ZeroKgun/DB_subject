@@ -4,13 +4,26 @@ import com.tinkerpop.blueprints.revised.Direction;
 import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Vertex;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 public class PersistentVertex implements Vertex {
+    private PersistentGraph g;
+    private String id;
+
+    public PersistentVertex(PersistentGraph g, String id) throws SQLException {
+        this.g = g;
+        this.id = id;
+
+        this.g.stmt.executeUpdate("INSERT INTO vertex VALUE(" + id + ", null);");
+    }
+
     @Override
     public String getId() {
-        return null;
+        return this.id;
     }
 
     @Override
@@ -19,12 +32,25 @@ public class PersistentVertex implements Vertex {
     }
 
     @Override
-    public Set<String> getPropertyKeys() {
-        return null;
+    public Set<String> getPropertyKeys() throws SQLException {
+        Set<String> keySet = new HashSet<>();
+        ResultSet rs = g.stmt.executeQuery("SELECT JSON_KEYS(property) FROM vertex WHERE id = " + this.id +";");
+        String a = rs.getString(1);
+        String[] arr = a.split("\"");
+
+        for(int i =0;i<arr.length;i++){
+            if(i%2==1){
+                keySet.add(arr[i]);
+            }
+        }
+
+        return keySet;
     }
 
     @Override
-    public void setProperty(String key, Object value) {
+    public void setProperty(String key, Object value) throws SQLException {
+        //s : id / o : jsonobject
+        g.stmt.executeUpdate("UPDATE vertex SET property = '" + value + "' where id = " + key);
 
     }
 
