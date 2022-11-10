@@ -9,7 +9,9 @@ import com.tinkerpop.blueprints.revised.Vertex;
 public class UnitTest {
 	public static void main(String[] args) throws Exception {
 		String dbID = "root";
+
 		String dbPW = "0726";
+
 		String dbName = "team";
 
 		//Graph g = new InMemoryGraph();
