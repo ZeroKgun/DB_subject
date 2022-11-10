@@ -18,11 +18,7 @@ public class PersistentVertex implements Vertex {
     public PersistentVertex(PersistentGraph g, String id) throws SQLException {
         this.g = g;
         this.id = id;
-<<<<<<< HEAD
-=======
 
-        //this.g.stmt.executeUpdate("INSERT INTO vertex VALUE(" + id + ", null);");
->>>>>>> 31e3790480c1f1fd9c122e983eff88a89ec55e19
     }
 
     @Override
