@@ -25,15 +25,25 @@ public class PersistentGraph implements Graph {
 
 
         stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id INT UNIQUE, property JSON)");
-        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout INT, Vin INT, label VARHCAR(20), property JSON)");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout INT, Vin INT, label VARCHAR(20), property JSON)");
 
 
     }
 
     @Override
     public Vertex addVertex(String id) throws IllegalArgumentException, SQLException {
+        if (id.contains("|")) {
+            throw new IllegalArgumentException("id cannot contain '|'");
+        }
 
-        stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
+        rs = stmt.executeQuery("SELECT COUNT(*) FROM vertex WHERE id = " + id);
+
+        while(rs.next()) {
+            int cnt = rs.getInt(1);
+            if(cnt == 0) {
+                stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
+            }
+        }
 
         Vertex newVertex = new PersistentVertex(this, id);
 
@@ -104,15 +114,15 @@ public class PersistentGraph implements Graph {
         if (inVertex == null) {
             throw new NullPointerException("inVertex cannot be null");
         }
-        String edge_id = outVertex + "|" + label + "|" + inVertex;
-        stmt.executeUpdate("INSERT INTO vertex VALUES(" +edge_id+","+ outVertex + ","+ inVertex + "," + label + ",null)");
+        String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
+        stmt.executeUpdate("INSERT INTO edge VALUES('" +edge_id+"','"+ outVertex.getId() + "','"+ inVertex.getId() + "','" + label + "',null)");
 
         return (Edge) new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
     }
 
     @Override
-    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException  {
-        String edge_id = outVertex + "|" + label + "|" + inVertex;
+    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException {
+        String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
         ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
         if (rs.next())
         {
