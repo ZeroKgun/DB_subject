@@ -5,6 +5,7 @@ import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class PersistentGraph implements Graph {
@@ -93,8 +94,26 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Edge addEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException {
-        return null;
+    public Edge addEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException {
+        if (label.contains("|")) {
+            throw new IllegalArgumentException("label cannot contain '|'");
+        }
+
+        if (outVertex == null) {
+            throw new NullPointerException("outVertex cannot be null");
+        }
+
+        if (inVertex == null) {
+            throw new NullPointerException("inVertex cannot be null");
+        }
+
+        String edgeID = outVertex.getId() + label + inVertex.getId();
+
+        stmt.executeUpdate("INSERT INTO edge VALUES("+edgeID +","+ outVertex.getId() + ","+inVertex.getId()+","+", null)");
+
+        Edge newEdge = new PersistentEdge(this, outVertex, label, inVertex); //생성자 논의
+
+        return newEdge;
     }
 
     @Override
