@@ -98,32 +98,39 @@ public class PersistentGraph implements Graph {
         if (label.contains("|")) {
             throw new IllegalArgumentException("label cannot contain '|'");
         }
-
         if (outVertex == null) {
             throw new NullPointerException("outVertex cannot be null");
         }
-
         if (inVertex == null) {
             throw new NullPointerException("inVertex cannot be null");
         }
+        String edge_id = outVertex + "|" + label + "|" + inVertex;
+        stmt.executeUpdate("INSERT INTO vertex VALUES(" +edge_id+","+ outVertex + ","+ inVertex + "," + label + ",null)");
 
-        String edgeID = outVertex.getId() + label + inVertex.getId();
-
-        stmt.executeUpdate("INSERT INTO edge VALUES("+edgeID +","+ outVertex.getId() + ","+inVertex.getId()+","+", null)");
-
-        Edge newEdge = new PersistentEdge(this, outVertex, label, inVertex); //생성자 논의
-
-        return newEdge;
+        return (Edge) new PersistentEdge(this, outVertex, label, inVertex);
     }
 
     @Override
-    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) {
-        return null;
+    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException  {
+        String edge_id = outVertex + "|" + label + "|" + inVertex;
+        ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
+        if (rs.next())
+        {
+            return (Edge) new PersistentEdge(this, outVertex, label, inVertex);
+        }
+        else
+            return null;
     }
 
     @Override
-    public Edge getEdge(String id) {
-        return null;
+    public Edge getEdge(String id) throws SQLException {
+        ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + id);
+        if (rs.next())
+        {
+            return (Edge) new PersistentEdge(this, rs.getString("Vout"), rs.getString("label"), rs.getString("Vin"));
+        }
+        else
+            return null;
     }
 
     @Override
@@ -132,13 +139,25 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Collection<Edge> getEdges() {
-        return null;
+    public Collection<Edge> getEdges() throws SQLException {
+        Collection<Edge> allEdges = new ArrayList<Edge>();
+        ResultSet rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge");
+        while (rs.next())
+        {
+            allEdges.add(new PersistentEdge(this, rs.getString("Vout"),rs.getString("label"), rs.getString("Vin")));
+        }
+        return allEdges;
     }
 
     @Override
-    public Collection<Edge> getEdges(String key, Object value) {
-        return null;
+    public Collection<Edge> getEdges(String key, Object value) throws SQLException {
+        Collection<Edge> allEdges = new ArrayList<Edge>();
+        ResultSet rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = '"+value+"';");
+        while (rs.next())
+        {
+            allEdges.add(new PersistentEdge(this, rs.getString("Vout"),rs.getString("label"), rs.getString("Vin")));
+        }
+        return allEdges;
     }
 
     @Override

@@ -97,7 +97,7 @@ public interface Graph {
 	 * @return the edge referenced by the provided identifier or null when no such
 	 *         edge exists
 	 */
-	public Edge getEdge(String id);
+	public Edge getEdge(String id) throws SQLException;
 
 	/**
 	 * Remove the provided edge from the graph.
@@ -112,7 +112,7 @@ public interface Graph {
 	 *
 	 * @return an iterable reference to all edges in the graph
 	 */
-	public Collection<Edge> getEdges();
+	public Collection<Edge> getEdges() throws SQLException;
 
 	/**
 	 * Return an iterable to all the edges in the graph that have a particular
@@ -125,7 +125,7 @@ public interface Graph {
 	 * @param value the value of the edge
 	 * @return an iterable of edges with provided key and value
 	 */
-	public Collection<Edge> getEdges(String key, Object value);
+	public Collection<Edge> getEdges(String key, Object value) throws SQLException;
 
 	/**
 	 * A shutdown function is required to properly close the graph. This is
