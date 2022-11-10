@@ -24,8 +24,8 @@ public class PersistentGraph implements Graph {
         stmt.executeUpdate("USE " + name);
 
 
-        stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id INT UNIQUE, property JSON)");
-        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout INT, Vin INT, label VARCHAR(20), property JSON)");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id VARCHAR(40) UNIQUE, property JSON)");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout VARCHAR(20), Vin VARCHAR(20), label VARCHAR(20), property JSON)");
 
 
     }
@@ -36,12 +36,14 @@ public class PersistentGraph implements Graph {
             throw new IllegalArgumentException("id cannot contain '|'");
         }
 
-        rs = stmt.executeQuery("SELECT COUNT(*) FROM vertex WHERE id = " + id);
+        rs = stmt.executeQuery("SELECT COUNT(*) FROM vertex WHERE id = '" + id+"'");
+        int cnt = 0;
 
         while(rs.next()) {
-            int cnt = rs.getInt(1);
+            if(id == rs.getString(1))
+                cnt++;
             if(cnt == 0) {
-                stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
+                stmt.executeUpdate("INSERT INTO vertex VALUES('" + id + "', null)");
             }
         }
 

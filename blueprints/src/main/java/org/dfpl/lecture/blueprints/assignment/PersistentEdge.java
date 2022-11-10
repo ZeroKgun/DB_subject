@@ -118,4 +118,8 @@ public class PersistentEdge implements Edge {
     public Object removeProperty(String key) {
         return null;
     }
+    @Override
+    public boolean equals(Object obj) {
+        return (this.getId().equals(((Edge)obj).getId()));
+    }
 }

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -92,13 +93,86 @@ public class PersistentVertex implements Vertex {
     }
 
     @Override
-    public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException {
-        return null;
+    public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException, SQLException {
+        Collection<Edge> newEdges = new ArrayList<>();
+        if(direction.equals(Direction.OUT)) {
+            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
+            while (rs.next()) {
+                Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
+                if(labels.length == 0) {
+                    newEdges.add(newEdge);
+                }
+                else {
+                    for(String label:labels) {
+                        if (newEdge.getLabel().equals(label)) {
+                            newEdges.add(newEdge);
+                        }
+                    }
+                }
+            }
+        }
+        else if (direction.equals(Direction.IN)) {
+            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
+            while (rs.next()) {
+                Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
+                if(labels.length == 0) {
+                    newEdges.add(newEdge);
+                }
+                else {
+                    for(String label:labels) {
+                        if (newEdge.getLabel().equals(label)) {
+                            newEdges.add(newEdge);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Direction.BOTH is not allowed");
+        }
+
+        return newEdges;
     }
 
     @Override
-    public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException {
-        return null;
+    public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException, SQLException {
+        Collection<Vertex> newVertices = new ArrayList<>();
+        if(direction.equals(Direction.OUT)) {
+            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
+            while (rs.next()) {
+                Vertex newVertex = new PersistentVertex(this.g, rs.getString(3));
+                if(labels.length == 0) {
+                    newVertices.add(newVertex);
+                }
+                else {
+                    for(String label:labels) {
+                        if (rs.getString(4).equals(label)) {
+                            newVertices.add(newVertex);
+                        }
+                    }
+                }
+            }
+        }
+        else if (direction.equals(Direction.IN)) {
+            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
+            while (rs.next()) {
+                Vertex newVertex = new PersistentVertex(this.g, rs.getString(2));
+                if(labels.length == 0) {
+                    newVertices.add(newVertex);
+                }
+                else {
+                    for(String label:labels) {
+                        if (rs.getString(4).equals(label)) {
+                            newVertices.add(newVertex);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Direction.BOTH is not allowed");
+        }
+        return newVertices;
     }
 
     @Override
@@ -115,4 +189,10 @@ public class PersistentVertex implements Vertex {
     public void remove() {
 
     }
+    @Override
+    public boolean equals(Object obj) {
+        return id.equals(((PersistentVertex) obj).getId());
+    }
+
 }
+

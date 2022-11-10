@@ -1,5 +1,6 @@
 package com.tinkerpop.blueprints.revised;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 /**
@@ -24,7 +25,7 @@ public interface Vertex extends Element {
 	 * @return an iterable of incident edges
 	 * @throws IllegalArgumentException is thrown if a direction of both is provided
 	 */
-	public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException;
+	public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException, SQLException;
 
 	/**
 	 * Return the vertices adjacent to the vertex according to the provided
@@ -36,7 +37,7 @@ public interface Vertex extends Element {
 	 * @return an iterable of adjacent vertices
 	 * @throws IllegalArgumentException is thrown if a direction of both is provided
 	 */
-	public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException;
+	public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException, SQLException;
 
 	public Collection<Vertex> getTwoHopVertices(Direction direction, String... labels) throws IllegalArgumentException;
 	

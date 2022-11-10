@@ -92,15 +92,16 @@ public class UnitTest {
 		System.out.println("[34] " + a.getEdges(Direction.IN).contains(ab));
 		System.out.println("[35] " + a.getEdges(Direction.IN).contains(ac));
 		System.out.println("[36] " + a.getEdges(Direction.IN).contains(ea));
-		System.out.println("[37] " + a.getVertices(Direction.OUT).contains(b));
-		System.out.println("[38] " + a.getVertices(Direction.OUT).contains(c));
-		System.out.println("[39] " + a.getVertices(Direction.OUT).contains(d));
-		System.out.println("[40] " + a.getVertices(Direction.OUT, "l").contains(b));
-		System.out.println("[41] " + a.getVertices(Direction.OUT, "k").contains(b));
-		System.out.println("[42] " + a.getVertices(Direction.OUT, "l", "k").contains(b));
-		System.out.println("[43] " + a.getVertices(Direction.IN).contains(b));
-		System.out.println("[44] " + a.getVertices(Direction.IN).contains(c));
-		System.out.println("[45] " + a.getVertices(Direction.IN).contains(e));
+		System.out.println("[37] " + a.getVertices(Direction.OUT).contains(b));//true
+		System.out.println("[38] " + a.getVertices(Direction.OUT).contains(c));//true
+		System.out.println("[39] " + a.getVertices(Direction.OUT).contains(d));//false
+		System.out.println("[40] " + a.getVertices(Direction.OUT, "l").contains(b));//true
+
+		System.out.println("[41] " + a.getVertices(Direction.OUT, "k").contains(b));//false
+		System.out.println("[42] " + a.getVertices(Direction.OUT, "l", "k").contains(b));//true
+		System.out.println("[43] " + a.getVertices(Direction.IN).contains(b));//false
+		System.out.println("[44] " + a.getVertices(Direction.IN).contains(c));//false
+		System.out.println("[45] " + a.getVertices(Direction.IN).contains(e));//true
 
 		Vertex s = g.addVertex("s");
 		Edge ss = g.addEdge(s, s, "l");
