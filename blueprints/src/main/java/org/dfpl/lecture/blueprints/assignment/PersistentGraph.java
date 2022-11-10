@@ -25,13 +25,16 @@ public class PersistentGraph implements Graph {
 
 
         stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id INT UNIQUE, property JSON)");
-        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout INT, Vin INT, label VARHCAR(20), property JSON)");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout INT, Vin INT, label VARCHAR(20), property JSON)");
 
 
     }
 
     @Override
     public Vertex addVertex(String id) throws IllegalArgumentException, SQLException {
+        if (id.contains("|")) {
+            throw new IllegalArgumentException("id cannot contain '|'");
+        }
 
         stmt.executeUpdate("INSERT INTO vertex VALUES(" + id + ", null)");
 
@@ -111,7 +114,7 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException  {
+    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException {
         String edge_id = outVertex + "|" + label + "|" + inVertex;
         ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
         if (rs.next())
