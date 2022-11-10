@@ -18,17 +18,17 @@ public class PersistentEdge implements Edge {
 
     private PersistentGraph g;
     private String id;
-    private Vertex outVertex;
+    private String outVertex;
     private String label;
-    private Vertex inVertex;
+    private String inVertex;
 
-    public PersistentEdge(PersistentGraph g, Vertex outVertex, String label, Vertex inVertex)
+    public PersistentEdge(PersistentGraph g, String outVertex, String label, String inVertex)
     {
         this.g = g;
         this.outVertex = outVertex;
         this.label = label;
         this.inVertex = inVertex;
-        this.id = outVertex.getId() + label + inVertex.getId();
+        this.id = outVertex + label + inVertex;
 
     }
     @Override
