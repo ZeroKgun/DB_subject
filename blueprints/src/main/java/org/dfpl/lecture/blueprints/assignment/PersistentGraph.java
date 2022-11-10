@@ -114,10 +114,21 @@ public class PersistentGraph implements Graph {
         if (inVertex == null) {
             throw new NullPointerException("inVertex cannot be null");
         }
-        String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
-        stmt.executeUpdate("INSERT INTO edge VALUES('" +edge_id+"','"+ outVertex.getId() + "','"+ inVertex.getId() + "','" + label + "',null)");
 
-        return (Edge) new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
+        String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
+
+        rs = stmt.executeQuery("SELECT COUNT(*) FROM edge WHERE id = '" + edge_id + "'");
+
+        while(rs.next()) {
+            int cnt = rs.getInt(1);
+            if(cnt == 0) {
+                stmt.executeUpdate("INSERT INTO edge VALUES('" +edge_id+"','"+ outVertex.getId() + "','"+ inVertex.getId() + "','" + label + "',null)");
+            }
+        }
+
+        Edge newEdge = new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
+
+        return newEdge;
     }
 
     @Override
@@ -156,7 +167,8 @@ public class PersistentGraph implements Graph {
         ResultSet rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge");
         while (rs.next())
         {
-            allEdges.add(new PersistentEdge(this, rs.getString("Vout"),rs.getString("label"), rs.getString("Vin")));
+            Edge newEdge = new PersistentEdge(this, rs.getString("Vout"),rs.getString("label"), rs.getString("Vin"));
+            allEdges.add(newEdge);
         }
         return allEdges;
     }

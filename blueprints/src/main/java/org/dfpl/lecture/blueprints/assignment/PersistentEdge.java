@@ -8,6 +8,7 @@ import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -28,7 +29,7 @@ public class PersistentEdge implements Edge {
         this.outVertex = outVertex;
         this.label = label;
         this.inVertex = inVertex;
-        this.id = outVertex + label + inVertex;
+        this.id = outVertex + "|" + label + "|" +  inVertex;
 
     }
     @Override
@@ -49,11 +50,7 @@ public class PersistentEdge implements Edge {
 
     @Override
     public String getId() {
-<<<<<<< HEAD
-        return outVertex + "|" + label + "|" +  inVertex;
-=======
         return this.id;
->>>>>>> 31e3790480c1f1fd9c122e983eff88a89ec55e19
     }
 
     @Override
@@ -61,16 +58,23 @@ public class PersistentEdge implements Edge {
     {
         ResultSet rs;
         String properties="";
-        String result = "";
+        //Object result = "";
         JSONObject r_properties = null;
-        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id =" +this.id +";");
+        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" +this.id +"'");
         while(rs.next()) {
             properties = rs.getString(5);
             r_properties = new JSONObject(properties);
         }
-
-
-        return r_properties.getString(key);
+        //Object r_result = r_properties.get(key);
+        if(r_properties.isNull(key)){
+            return null;
+        }
+        else {
+            if(r_properties.get(key) instanceof BigDecimal)
+                return Double.parseDouble(String.valueOf(r_properties.get(key)));
+            else
+                return r_properties.get(key);
+        }
 
     }
 
@@ -79,7 +83,7 @@ public class PersistentEdge implements Edge {
         ResultSet rs;
         String properties="";
         JSONObject r_properties = null;
-        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = " + this.id + ";");
+        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" + this.id + "'");
 
         while(rs.next()) {
             properties = rs.getString(5);
@@ -91,14 +95,21 @@ public class PersistentEdge implements Edge {
     @Override
     public void setProperty(String key, Object value) throws SQLException {
         ResultSet rs;
-        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id ="+this.id);
+        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '"+this.id +"'");
+
         while(rs.next())
         {
             if(rs.getString(5) == null) {
-                g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = " + this.id);
+                if(value instanceof String)
+                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = '" + this.id + "'");
+                else
+                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "'," + value + ") WHERE id = '" + this.id + "'");
             }
             else {
-                g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$."+key+"','"+value+"') WHERE id = " + this.id);
+                if(value instanceof String)
+                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$."+key+"','"+value+"') WHERE id = '" + this.id + "'");
+                else
+                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$."+key+"',"+value+") WHERE id = '" + this.id + "'");
             }
         }
     }
