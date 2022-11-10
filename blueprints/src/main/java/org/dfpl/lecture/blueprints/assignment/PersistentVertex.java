@@ -5,6 +5,7 @@ import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Vertex;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -30,7 +31,7 @@ public class PersistentVertex implements Vertex {
     public Object getProperty(String key) throws SQLException {
         ResultSet rs;
         String properties="";
-        String result = "";
+        //Object result = "";
         JSONObject r_properties = null;
         rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id =" +this.id +";");
         while(rs.next()) {
@@ -41,8 +42,12 @@ public class PersistentVertex implements Vertex {
         if(r_properties.isNull(key)){
             return null;
         }
-        else
-            return String.valueOf(r_properties.get(key));
+        else {
+            if(r_properties.get(key) instanceof BigDecimal)
+                return Double.parseDouble(String.valueOf(r_properties.get(key)));
+            else
+                return r_properties.get(key);
+        }
     }
 
     @Override
@@ -68,10 +73,16 @@ public class PersistentVertex implements Vertex {
         while(rs.next())
         {
             if(rs.getString(2) == null) {
-                g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = " + this.id);
+                if(value instanceof String)
+                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = " + this.id);
+                else
+                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "'," + value + ") WHERE id = " + this.id);
             }
             else {
-                g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$."+key+"','"+value+"') WHERE id = " + this.id);
+                if(value instanceof String)
+                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$."+key+"','"+value+"') WHERE id = " + this.id);
+                else
+                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$."+key+"',"+value+") WHERE id = " + this.id);
             }
         }
     }

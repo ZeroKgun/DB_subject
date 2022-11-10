@@ -9,7 +9,6 @@ import com.tinkerpop.blueprints.revised.Vertex;
 public class UnitTest {
 	public static void main(String[] args) throws Exception {
 		String dbID = "root";
-
 		String dbPW = "0726";
 		String dbName = "team";
 
@@ -30,17 +29,17 @@ public class UnitTest {
 		System.out.println("[6] " + g.getVertex("2"));
 		Vertex v2 = g.addVertex("2");
 		System.out.println("[7] " + g.getVertices().size());
-		//v1.setProperty("k1", "v1");
-		//v1.setProperty("k2", true);
-		//v1.setProperty("k3", 3);
-		//v1.setProperty("k4", 4.5);
-		//System.out.println("[8] " + v1.getPropertyKeys().size());
-		//System.out.println("[9] " + (v1.getProperty("k0") == null));
-		//System.out.println("[10] " + v1.getProperty("k1").equals("v2"));
-		//System.out.println("[11] " + ((boolean) v1.getProperty("k2") == true));
-		//System.out.println("[12] " + ((int) v1.getProperty("k3") == 4));
-		//System.out.println("[13] " + ((double) v1.getProperty("k4") == 4.5));
-		//System.out.println("[14] " + g.getVertices("k1", "v1").size());
+		v1.setProperty("k1", "v1");
+		v1.setProperty("k2", true);
+		v1.setProperty("k3", 3);
+		v1.setProperty("k4", 4.5);
+		System.out.println("[8] " + v1.getPropertyKeys().size());
+		System.out.println("[9] " + (v1.getProperty("k0") == null));
+		System.out.println("[10] " + v1.getProperty("k1").equals("v2"));
+		System.out.println("[11] " + ((boolean) v1.getProperty("k2") == true));
+		System.out.println("[12] " + ((int) v1.getProperty("k3") == 4));
+		System.out.println("[13] " + ((double) v1.getProperty("k4") == 4.5));
+		System.out.println("[14] " + g.getVertices("k1", "v1").size());
 		Edge e1l2 = g.addEdge(v1, v2, "l");
 		System.out.println("[15] " + e1l2.getId());
 		System.out.println("[16] " + g.getEdges().size());
