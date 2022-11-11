@@ -28,41 +28,47 @@ public class PersistentVertex implements Vertex {
     }
 
     @Override
-    public Object getProperty(String key) throws SQLException {
+    public Object getProperty(String key) {
         ResultSet rs;
         String properties="";
         //Object result = "";
         JSONObject r_properties = null;
-        rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id =" +this.id +";");
-        while(rs.next()) {
-            properties = rs.getString(2);
-            r_properties = new JSONObject(properties);
-        }
-        //Object r_result = r_properties.get(key);
-        if(r_properties.isNull(key)){
-            return null;
-        }
-        else {
-            if(r_properties.get(key) instanceof BigDecimal)
-                return Double.parseDouble(String.valueOf(r_properties.get(key)));
-            else
-                return r_properties.get(key);
+        try {
+            rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id =" +this.id +";");
+            while(rs.next()) {
+                properties = rs.getString(2);
+                r_properties = new JSONObject(properties);
+            }
+            //Object r_result = r_properties.get(key);
+            if(r_properties.isNull(key)){
+                return null;
+            }
+            else {
+                if(r_properties.get(key) instanceof BigDecimal)
+                    return Double.parseDouble(String.valueOf(r_properties.get(key)));
+                else
+                    return r_properties.get(key);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @Override
-    public Set<String> getPropertyKeys() throws SQLException {
+    public Set<String> getPropertyKeys() {
         ResultSet rs;
         String properties="";
         JSONObject r_properties = null;
-        rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + this.id + ";");
-
-        while(rs.next()) {
-            properties = rs.getString(2);
-            r_properties = new JSONObject(properties);
+        try {
+            rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + this.id + ";");
+            while(rs.next()) {
+                properties = rs.getString(2);
+                r_properties = new JSONObject(properties);
+            }
+            return r_properties.keySet();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return r_properties.keySet();
-
     }
 
     @Override
@@ -93,38 +99,48 @@ public class PersistentVertex implements Vertex {
     }
 
     @Override
-    public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException, SQLException {
+    public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException {
         Collection<Edge> newEdges = new ArrayList<>();
         if(direction.equals(Direction.OUT)) {
-            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
-            while (rs.next()) {
-                Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
-                if(labels.length == 0) {
-                    newEdges.add(newEdge);
-                }
-                else {
-                    for(String label:labels) {
-                        if (newEdge.getLabel().equals(label)) {
-                            newEdges.add(newEdge);
+            ResultSet rs = null;
+            try {
+                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
+                while (rs.next()) {
+                    Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
+                    if(labels.length == 0) {
+                        newEdges.add(newEdge);
+                    }
+                    else {
+                        for(String label:labels) {
+                            if (newEdge.getLabel().equals(label)) {
+                                newEdges.add(newEdge);
+                            }
                         }
                     }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
         else if (direction.equals(Direction.IN)) {
-            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
-            while (rs.next()) {
-                Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
-                if(labels.length == 0) {
-                    newEdges.add(newEdge);
-                }
-                else {
-                    for(String label:labels) {
-                        if (newEdge.getLabel().equals(label)) {
-                            newEdges.add(newEdge);
+            ResultSet rs = null;
+            try {
+                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
+                while (rs.next()) {
+                    Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
+                    if(labels.length == 0) {
+                        newEdges.add(newEdge);
+                    }
+                    else {
+                        for(String label:labels) {
+                            if (newEdge.getLabel().equals(label)) {
+                                newEdges.add(newEdge);
+                            }
                         }
                     }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
         else {
@@ -135,39 +151,51 @@ public class PersistentVertex implements Vertex {
     }
 
     @Override
-    public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException, SQLException {
+    public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException {
         Collection<Vertex> newVertices = new ArrayList<>();
         if(direction.equals(Direction.OUT)) {
-            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
-            while (rs.next()) {
-                Vertex newVertex = new PersistentVertex(this.g, rs.getString(3));
-                if(labels.length == 0) {
-                    newVertices.add(newVertex);
-                }
-                else {
-                    for(String label:labels) {
-                        if (rs.getString(4).equals(label)) {
-                            newVertices.add(newVertex);
+            ResultSet rs = null;
+            try {
+                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
+                while (rs.next()) {
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString(3));
+                    if(labels.length == 0) {
+                        newVertices.add(newVertex);
+                    }
+                    else {
+                        for(String label:labels) {
+                            if (rs.getString(4).equals(label)) {
+                                newVertices.add(newVertex);
+                            }
                         }
                     }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+
         }
         else if (direction.equals(Direction.IN)) {
-            ResultSet rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
-            while (rs.next()) {
-                Vertex newVertex = new PersistentVertex(this.g, rs.getString(2));
-                if(labels.length == 0) {
-                    newVertices.add(newVertex);
-                }
-                else {
-                    for(String label:labels) {
-                        if (rs.getString(4).equals(label)) {
-                            newVertices.add(newVertex);
+            ResultSet rs = null;
+            try {
+                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
+                while (rs.next()) {
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString(2));
+                    if(labels.length == 0) {
+                        newVertices.add(newVertex);
+                    }
+                    else {
+                        for(String label:labels) {
+                            if (rs.getString(4).equals(label)) {
+                                newVertices.add(newVertex);
+                            }
                         }
                     }
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
+
         }
         else {
             throw new IllegalArgumentException("Direction.BOTH is not allowed");
@@ -182,7 +210,61 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Collection<Vertex> getVertices(Direction direction, String key, Object value, String... labels) throws IllegalArgumentException {
-        return null;
+        Collection<Vertex> newVertices = new ArrayList<>();
+        if(direction.equals(Direction.OUT)) {
+            ResultSet rs = null;
+            try {
+                if (value instanceof String)
+                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
+                else
+                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = " + value + ";");
+                while (rs.next()) {
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString("id"));
+                    if(labels.length == 0) {
+                        newVertices.add(newVertex);
+                    }
+                    else {
+                        for(String label:labels) {
+                            if (rs.getString("label").equals(label)) {
+                                newVertices.add(newVertex);
+                            }
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        else if (direction.equals(Direction.IN)) {
+            ResultSet rs = null;
+            try {
+                if (value instanceof String)
+                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
+                else
+                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = " + value + ";");
+                while (rs.next()) {
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString("id"));
+                    if(labels.length == 0) {
+                        newVertices.add(newVertex);
+                    }
+                    else {
+                        for(String label:labels) {
+                            if (rs.getString("label").equals(label)) {
+                                newVertices.add(newVertex);
+                            }
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        else {
+            throw new IllegalArgumentException("Direction.BOTH is not allowed");
+        }
+        return newVertices;
     }
 
     @Override

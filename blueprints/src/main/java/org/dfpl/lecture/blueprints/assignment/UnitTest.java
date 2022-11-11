@@ -4,13 +4,13 @@ import com.tinkerpop.blueprints.revised.Direction;
 import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
-//import org.dfpl.lecture.blueprints.memory.InMemoryGraph;
+import org.dfpl.lecture.blueprints.memory.InMemoryGraph;
 
 public class UnitTest {
 	public static void main(String[] args) throws Exception {
 		String dbID = "root";
 
-		String dbPW = "0726";
+		String dbPW = "1234";
 
 		String dbName = "team";
 
@@ -19,7 +19,7 @@ public class UnitTest {
 
 		Vertex v1 = g.addVertex("1");
 		System.out.println("[1] " + v1.getId());
-		//v1 = g.addVertex("1");
+		v1 = g.addVertex("1");
 		System.out.println("[2] " + v1.getId());
 		System.out.println("[3] " + g.getVertices().size());
 		System.out.println("[4] " + g.getVertex("1").getId());

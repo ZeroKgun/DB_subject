@@ -34,7 +34,40 @@ public class PersistentEdge implements Edge {
     }
     @Override
     public Vertex getVertex(Direction direction) throws IllegalArgumentException {
-        return null;
+        if (direction.equals(Direction.OUT)) {
+            ResultSet rs;
+            try {
+                rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + outVertex + ";");
+                Vertex newVertex = null;
+
+                while(rs.next()) {
+                    String newId = rs.getString(1);
+
+                    newVertex = new PersistentVertex(g, newId);
+                }
+                return newVertex;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (direction.equals(Direction.IN)) {
+            ResultSet rs;
+            try {
+                rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + inVertex + ";");
+                Vertex newVertex = null;
+
+                while(rs.next()) {
+                    String newId = rs.getString(1);
+
+                    newVertex = new PersistentVertex(g, newId);
+                }
+
+                return newVertex;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            throw new IllegalArgumentException("Direction.BOTH is not allowed");
+        }
     }
 
     @Override
@@ -54,42 +87,48 @@ public class PersistentEdge implements Edge {
     }
 
     @Override
-    public Object getProperty(String key) throws SQLException
+    public Object getProperty(String key)
     {
         ResultSet rs;
         String properties="";
         //Object result = "";
         JSONObject r_properties = null;
-        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" +this.id +"'");
-        while(rs.next()) {
-            properties = rs.getString(5);
-            r_properties = new JSONObject(properties);
+        try {
+            rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" +this.id +"'");
+            while(rs.next()) {
+                properties = rs.getString(5);
+                r_properties = new JSONObject(properties);
+            }
+            //Object r_result = r_properties.get(key);
+            if(r_properties.isNull(key)){
+                return null;
+            }
+            else {
+                if(r_properties.get(key) instanceof BigDecimal)
+                    return Double.parseDouble(String.valueOf(r_properties.get(key)));
+                else
+                    return r_properties.get(key);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        //Object r_result = r_properties.get(key);
-        if(r_properties.isNull(key)){
-            return null;
-        }
-        else {
-            if(r_properties.get(key) instanceof BigDecimal)
-                return Double.parseDouble(String.valueOf(r_properties.get(key)));
-            else
-                return r_properties.get(key);
-        }
-
     }
 
     @Override
-    public Set<String> getPropertyKeys() throws SQLException {
+    public Set<String> getPropertyKeys(){
         ResultSet rs;
         String properties="";
         JSONObject r_properties = null;
-        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" + this.id + "'");
-
-        while(rs.next()) {
-            properties = rs.getString(5);
-            r_properties = new JSONObject(properties);
+        try {
+            rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" + this.id + "'");
+            while(rs.next()) {
+                properties = rs.getString(5);
+                r_properties = new JSONObject(properties);
+            }
+            return r_properties.keySet();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return r_properties.keySet();
     }
 
     @Override
@@ -111,6 +150,7 @@ public class PersistentEdge implements Edge {
                 else
                     g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$."+key+"',"+value+") WHERE id = '" + this.id + "'");
             }
+            break;
         }
     }
 

@@ -21,14 +21,14 @@ public interface Element {
 	 * @param key the key of the key/value property
 	 * @return the object value related to the string key
 	 */
-	public Object getProperty(String key) throws SQLException;
+	public Object getProperty(String key);
 
 	/**
 	 * Return all the keys associated with the element.
 	 *
 	 * @return the set of all string keys associated with the element
 	 */
-	public Set<String> getPropertyKeys() throws SQLException;
+	public Set<String> getPropertyKeys();
 
 	/**
 	 * Assign a key/value property to the element. If a value already exists for

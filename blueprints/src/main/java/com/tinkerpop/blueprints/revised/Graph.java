@@ -21,7 +21,7 @@ public interface Graph {
 	 * @return the newly created vertex or the existing vertex, v(id)
 	 * @throws IllegalArgumentException is thrown if id contains '|'
 	 */
-	public Vertex addVertex(String id) throws IllegalArgumentException, SQLException;
+	public Vertex addVertex(String id) throws IllegalArgumentException;
 
 	/**
 	 * Return the vertex referenced by the provided object identifier. If no vertex
@@ -31,7 +31,7 @@ public interface Graph {
 	 * @return the vertex referenced by the provided identifier or null when no such
 	 *         vertex exists
 	 */
-	public Vertex getVertex(String id) throws SQLException;
+	public Vertex getVertex(String id);
 
 	/**
 	 * Remove the provided vertex from the graph. Upon removing the vertex, all the
@@ -47,7 +47,7 @@ public interface Graph {
 	 *
 	 * @return an iterable reference to all vertices in the graph
 	 */
-	public Collection<Vertex> getVertices() throws SQLException;
+	public Collection<Vertex> getVertices();
 
 	/**
 	 * Return an iterable to all the vertices in the graph that have a particular
@@ -60,7 +60,7 @@ public interface Graph {
 	 * @param value the value of the vertex
 	 * @return an iterable of vertices with provided key and value
 	 */
-	public Collection<Vertex> getVertices(String key, Object value) throws SQLException;
+	public Collection<Vertex> getVertices(String key, Object value);
 
 	/**
 	 * Create a new edge if e(outVertexID|label|inVertexID) does not exist in the
@@ -114,7 +114,7 @@ public interface Graph {
 	 *
 	 * @return an iterable reference to all edges in the graph
 	 */
-	public Collection<Edge> getEdges() throws SQLException;
+	public Collection<Edge> getEdges();
 
 	/**
 	 * Return an iterable to all the edges in the graph that have a particular
