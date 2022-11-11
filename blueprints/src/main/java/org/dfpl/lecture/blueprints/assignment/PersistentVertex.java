@@ -205,7 +205,13 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Collection<Vertex> getTwoHopVertices(Direction direction, String... labels) throws IllegalArgumentException {
-        return null;
+        Collection<Vertex> AllVertices = new ArrayList<Vertex>();
+        for (Vertex vhop1 : getVertices(direction, labels)){
+            for (Vertex vhop2 : vhop1.getVertices(direction, labels))
+                for (Vertex vhop3 : vhop2.getVertices(direction, labels))
+                    AllVertices.add(vhop3);
+        }
+        return AllVertices;
     }
 
     @Override

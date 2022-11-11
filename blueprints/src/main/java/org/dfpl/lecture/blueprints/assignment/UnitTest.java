@@ -14,8 +14,8 @@ public class UnitTest {
 
 		String dbName = "team";
 
-		Graph g = new InMemoryGraph();
-		//Graph g = new PersistentGraph(dbID, dbPW, dbName);
+		//Graph g = new InMemoryGraph();
+		Graph g = new PersistentGraph(dbID, dbPW, dbName);
 
 		Vertex v1 = g.addVertex("1");
 		System.out.println("[1] " + v1.getId());

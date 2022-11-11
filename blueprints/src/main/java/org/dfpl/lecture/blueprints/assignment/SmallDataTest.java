@@ -238,7 +238,7 @@ public class SmallDataTest {
     }
 
     @SuppressWarnings("unused")
-    private static void scanDegree(Graph g, Direction direction) throws SQLException {
+    private static void scanDegree(Graph g, Direction direction) {
         String maxID = null;
         Integer maxDegree = Integer.MIN_VALUE;
         for (Vertex v : g.getVertices()) {

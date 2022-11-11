@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/../CollegeMsg.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CollegeMsg.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" afterDir="false" />
@@ -59,7 +60,7 @@
       <workItem from="1668086422171" duration="238000" />
       <workItem from="1668086806546" duration="1265000" />
       <workItem from="1668088081295" duration="3623000" />
-      <workItem from="1668124320949" duration="15622000" />
+      <workItem from="1668124320949" duration="18826000" />
     </task>
     <servers />
   </component>
