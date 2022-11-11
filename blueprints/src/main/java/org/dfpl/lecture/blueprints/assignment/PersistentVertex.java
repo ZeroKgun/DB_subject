@@ -215,11 +215,11 @@ public class PersistentVertex implements Vertex {
             ResultSet rs = null;
             try {
                 if (value instanceof String)
-                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
+                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "' AND Vout = '"+ this.id +"';");
                 else
-                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = " + value + ";");
+                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = " + value + " AND Vout = '"+ this.id +"';");
                 while (rs.next()) {
-                    Vertex newVertex = new PersistentVertex(this.g, rs.getString("id"));
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString("vin"));
                     if(labels.length == 0) {
                         newVertices.add(newVertex);
                     }
@@ -240,11 +240,11 @@ public class PersistentVertex implements Vertex {
             ResultSet rs = null;
             try {
                 if (value instanceof String)
-                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
+                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "' AND Vin = '"+id+"';");
                 else
-                    rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = " + value + ";");
+                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = " + value + " AND Vin = '"+id+"';");
                 while (rs.next()) {
-                    Vertex newVertex = new PersistentVertex(this.g, rs.getString("id"));
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString("vout"));
                     if(labels.length == 0) {
                         newVertices.add(newVertex);
                     }

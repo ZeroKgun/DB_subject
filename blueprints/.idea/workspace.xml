@@ -5,37 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4557e4a8-82f6-45ef-9a77-4c5d744b8ef8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CollegeMsg.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../CollegeMsg.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Vertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Vertex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/memory/InMemoryVertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/memory/InMemoryVertex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Element.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Element.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Graph.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Graph.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Vertex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Vertex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentEdge.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentEdge.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentGraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentGraph.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/UnitTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/UnitTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice18.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice24.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice25.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice26.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice27.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice28.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice28.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +43,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/happy/IdeaProjects/untitled",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "build.tools"
   }
 }]]></component>
@@ -82,7 +59,7 @@
       <workItem from="1668086422171" duration="238000" />
       <workItem from="1668086806546" duration="1265000" />
       <workItem from="1668088081295" duration="3623000" />
-      <workItem from="1668124320949" duration="7052000" />
+      <workItem from="1668124320949" duration="15622000" />
     </task>
     <servers />
   </component>
