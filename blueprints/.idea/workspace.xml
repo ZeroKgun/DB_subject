@@ -5,15 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4557e4a8-82f6-45ef-9a77-4c5d744b8ef8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/DBteamplay.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/newDB.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice18.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice24.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice24.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice25.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice25.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice26.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice26.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice27.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice27.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice28.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice28.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +80,8 @@
       <workItem from="1668654410235" duration="193000" />
       <workItem from="1668654700335" duration="980000" />
       <workItem from="1668655696428" duration="1651000" />
+      <workItem from="1668668863294" duration="28000" />
+      <workItem from="1668668932736" duration="1225000" />
     </task>
     <servers />
   </component>

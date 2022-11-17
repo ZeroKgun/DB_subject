@@ -122,7 +122,7 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Edge addEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException {
+    public Edge addEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException {
         if (label.contains("|")) {
             throw new IllegalArgumentException("label cannot contain '|'");
         }
@@ -135,12 +135,30 @@ public class PersistentGraph implements Graph {
 
         String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
 
-        rs = stmt.executeQuery("SELECT COUNT(*) FROM edge WHERE id = '" + edge_id + "'");
+        try {
+            rs = stmt.executeQuery("SELECT COUNT(*) FROM edge WHERE id = '" + edge_id + "'");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        while(rs.next()) {
-            int cnt = rs.getInt(1);
+        while(true) {
+            try {
+                if (!rs.next()) break;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            int cnt = 0;
+            try {
+                cnt = rs.getInt(1);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
             if(cnt == 0) {
-                stmt.executeUpdate("INSERT INTO edge VALUES('" +edge_id+"','"+ outVertex.getId() + "','"+ inVertex.getId() + "','" + label + "',null)");
+                try {
+                    stmt.executeUpdate("INSERT INTO edge VALUES('" +edge_id+"','"+ outVertex.getId() + "','"+ inVertex.getId() + "','" + label + "',null)");
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
             break;
         }
@@ -151,28 +169,46 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException, SQLException {
+    public Edge getEdge(Vertex outVertex, Vertex inVertex, String label) throws IllegalArgumentException, NullPointerException {
 
         String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
 
-        ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
-        if (rs.next())
-        {
-            return (Edge) new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        else
-            return null;
+        try {
+            if (rs.next())
+            {
+                return (Edge) new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
+            }
+            else
+                return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public Edge getEdge(String id) throws SQLException {
-        ResultSet rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + id);
-        if (rs.next())
-        {
-            return (Edge) new PersistentEdge(this, rs.getString("Vout"), rs.getString("label"), rs.getString("Vin"));
+    public Edge getEdge(String id) {
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        else
-            return null;
+        try {
+            if (rs.next())
+            {
+                return (Edge) new PersistentEdge(this, rs.getString("Vout"), rs.getString("label"), rs.getString("Vin"));
+            }
+            else
+                return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -198,16 +234,35 @@ public class PersistentGraph implements Graph {
     }
 
     @Override
-    public Collection<Edge> getEdges(String key, Object value) throws SQLException {
+    public Collection<Edge> getEdges(String key, Object value) {
         Collection<Edge> allEdges = new ArrayList<Edge>();
         ResultSet rs;
-        if (value instanceof String)
-            rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = '"+value+"';");
-        else
-            rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = "+value+";");
-        while (rs.next())
+        if (value instanceof String) {
+            try {
+                rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = '"+value+"';");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else {
+            try {
+                rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = "+value+";");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        while (true)
         {
-            allEdges.add(new PersistentEdge(this, rs.getString("Vout"),rs.getString("label"), rs.getString("Vin")));
+            try {
+                if (!rs.next()) break;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                allEdges.add(new PersistentEdge(this, rs.getString("Vout"),rs.getString("label"), rs.getString("Vin")));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
         return allEdges;
     }
