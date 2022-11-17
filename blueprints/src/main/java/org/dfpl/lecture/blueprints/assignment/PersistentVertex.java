@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class PersistentVertex implements Vertex {
@@ -34,9 +34,9 @@ public class PersistentVertex implements Vertex {
         //Object result = "";
         JSONObject r_properties = null;
         try {
-            rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id =" +this.id +";");
+            rs = g.stmt.executeQuery("SELECT property FROM vertex WHERE id =" +this.id +";");
             while(rs.next()) {
-                properties = rs.getString(2);
+                properties = rs.getString("property");
                 r_properties = new JSONObject(properties);
             }
             //Object r_result = r_properties.get(key);
@@ -60,9 +60,9 @@ public class PersistentVertex implements Vertex {
         String properties="";
         JSONObject r_properties = null;
         try {
-            rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + this.id + ";");
+            rs = g.stmt.executeQuery("SELECT property FROM vertex WHERE id = " + this.id + ";");
             while(rs.next()) {
-                properties = rs.getString(2);
+                properties = rs.getString("property");
                 r_properties = new JSONObject(properties);
             }
             return r_properties.keySet();
@@ -76,9 +76,9 @@ public class PersistentVertex implements Vertex {
         //s : id / o : jsonobject
         try {
             ResultSet rs;
-            rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id =" + this.id);
+            rs = g.stmt.executeQuery("SELECT property FROM vertex WHERE id =" + this.id);
             while (rs.next()) {
-                if (rs.getString(2) == null) {
+                if (rs.getString("property") == null) {
                     if (value instanceof String)
                         g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = " + this.id);
                     else
@@ -107,9 +107,9 @@ public class PersistentVertex implements Vertex {
         if(direction.equals(Direction.OUT)) {
             ResultSet rs = null;
             try {
-                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
+                rs = g.stmt.executeQuery("SELECT vin,vout,label FROM edge WHERE Vout = '" + this.id + "'");
                 while (rs.next()) {
-                    Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
+                    Edge newEdge = new PersistentEdge(this.g, rs.getString("vout"), rs.getString("label"), rs.getString("vin"));
                     if(labels.length == 0) {
                         newEdges.add(newEdge);
                     }
@@ -117,6 +117,7 @@ public class PersistentVertex implements Vertex {
                         for(String label:labels) {
                             if (newEdge.getLabel().equals(label)) {
                                 newEdges.add(newEdge);
+                                break;
                             }
                         }
                     }
@@ -128,9 +129,9 @@ public class PersistentVertex implements Vertex {
         else if (direction.equals(Direction.IN)) {
             ResultSet rs = null;
             try {
-                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
+                rs = g.stmt.executeQuery("SELECT vin,vout,label FROM edge WHERE Vin = '" + this.id + "'");
                 while (rs.next()) {
-                    Edge newEdge = new PersistentEdge(this.g, rs.getString(2), rs.getString(4), rs.getString(3));
+                    Edge newEdge = new PersistentEdge(this.g, rs.getString("vout"), rs.getString("label"), rs.getString("vin"));
                     if(labels.length == 0) {
                         newEdges.add(newEdge);
                     }
@@ -138,6 +139,7 @@ public class PersistentVertex implements Vertex {
                         for(String label:labels) {
                             if (newEdge.getLabel().equals(label)) {
                                 newEdges.add(newEdge);
+                                break;
                             }
                         }
                     }

@@ -33,7 +33,7 @@ public class PersistentEdge implements Edge {
         if (direction.equals(Direction.OUT)) {
             ResultSet rs;
             try {
-                rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + outVertex + ";");
+                rs = g.stmt.executeQuery("SELECT id FROM vertex WHERE id = " + outVertex + ";");
                 Vertex newVertex = null;
 
                 while(rs.next()) {
@@ -48,7 +48,7 @@ public class PersistentEdge implements Edge {
         } else if (direction.equals(Direction.IN)) {
             ResultSet rs;
             try {
-                rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id = " + inVertex + ";");
+                rs = g.stmt.executeQuery("SELECT id FROM vertex WHERE id = " + inVertex + ";");
                 Vertex newVertex = null;
 
                 while(rs.next()) {
@@ -90,9 +90,9 @@ public class PersistentEdge implements Edge {
         //Object result = "";
         JSONObject r_properties = null;
         try {
-            rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" +this.id +"'");
+            rs = g.stmt.executeQuery("SELECT property FROM edge WHERE id = '" +this.id +"'");
             while(rs.next()) {
-                properties = rs.getString(5);
+                properties = rs.getString("property");
                 r_properties = new JSONObject(properties);
             }
             //Object r_result = r_properties.get(key);
@@ -116,9 +116,9 @@ public class PersistentEdge implements Edge {
         String properties="";
         JSONObject r_properties = null;
         try {
-            rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '" + this.id + "'");
+            rs = g.stmt.executeQuery("SELECT property FROM edge WHERE id = '" + this.id + "'");
             while(rs.next()) {
-                properties = rs.getString(5);
+                properties = rs.getString("property");
                 r_properties = new JSONObject(properties);
             }
             return r_properties.keySet();
@@ -131,9 +131,9 @@ public class PersistentEdge implements Edge {
     public void setProperty(String key, Object value)  {
         try {
             ResultSet rs;
-            rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '"+this.id +"'");
+            rs = g.stmt.executeQuery("SELECT property FROM edge WHERE id = '"+this.id +"'");
             while (rs.next()) {
-                if (rs.getString(5) == null) {
+                if (rs.getString("property") == null) {
                     if (value instanceof String)
                         g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = '" + this.id + "'");
                     else

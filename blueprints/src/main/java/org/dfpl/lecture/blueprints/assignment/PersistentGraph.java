@@ -24,8 +24,8 @@ public class PersistentGraph implements Graph {
         stmt.executeUpdate("USE " + name);
 
 
-        stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id VARCHAR(40) UNIQUE , property JSON)");
-        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout VARCHAR(20), Vin VARCHAR(20), label VARCHAR(20), property JSON)");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id VARCHAR(40) UNIQUE , property JSON, INDEX(id))");
+        stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout VARCHAR(20), Vin VARCHAR(20), label VARCHAR(20), property JSON, INDEX(id), INDEX(vout), INDEX(vin))");
 
     }
 
@@ -60,13 +60,13 @@ public class PersistentGraph implements Graph {
     public Vertex getVertex(String id) {
 
         try {
-            rs = stmt.executeQuery("SELECT * FROM vertex WHERE id = " + id + ";");
+            rs = stmt.executeQuery("SELECT id FROM vertex WHERE id = " + id + ";");
             Vertex newVertex = null;
 
             while(rs.next()) {
-                String newId = rs.getString(1);
+                //String newId = rs.getString(1);
 
-                newVertex = new PersistentVertex(this, newId);
+                newVertex = new PersistentVertex(this, id);
             }
 
             return newVertex;
@@ -85,7 +85,7 @@ public class PersistentGraph implements Graph {
         ArrayList<Vertex> newVertices = new ArrayList<>();
 
         try {
-            rs = stmt.executeQuery("SELECT * FROM vertex;");
+            rs = stmt.executeQuery("SELECT id FROM vertex;");
             while(rs.next()) {
                 String newId = rs.getString(1);
                 Vertex newVertex = new PersistentVertex(this, newId);
@@ -105,9 +105,9 @@ public class PersistentGraph implements Graph {
 
         try {
             if (value instanceof String)
-                rs = stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
+                rs = stmt.executeQuery("SELECT id FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "';");
             else
-                rs = stmt.executeQuery("SELECT * FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = " + value + ";");
+                rs = stmt.executeQuery("SELECT id FROM vertex WHERE JSON_VALUE(property, '$." + key + "') = " + value + ";");
             while(rs.next()) {
                 String newId = rs.getString(1);
                 Vertex newVertex = new PersistentVertex(this, newId);
@@ -137,30 +137,18 @@ public class PersistentGraph implements Graph {
 
         try {
             rs = stmt.executeQuery("SELECT COUNT(*) FROM edge WHERE id = '" + edge_id + "'");
+
+            while(true) {
+                if (!rs.next()) break;
+                int cnt = 0;
+                cnt = rs.getInt(1);
+                if(cnt == 0) {
+                        stmt.executeUpdate("INSERT INTO edge VALUES('" +edge_id+"','"+ outVertex.getId() + "','"+ inVertex.getId() + "','" + label + "',null)");
+                }
+                break;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-
-        while(true) {
-            try {
-                if (!rs.next()) break;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            int cnt = 0;
-            try {
-                cnt = rs.getInt(1);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            if(cnt == 0) {
-                try {
-                    stmt.executeUpdate("INSERT INTO edge VALUES('" +edge_id+"','"+ outVertex.getId() + "','"+ inVertex.getId() + "','" + label + "',null)");
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            break;
         }
 
         Edge newEdge = new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
@@ -175,11 +163,7 @@ public class PersistentGraph implements Graph {
 
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + edge_id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
+            rs = stmt.executeQuery("SELECT id FROM edge WHERE id=" + edge_id);
             if (rs.next())
             {
                 return (Edge) new PersistentEdge(this, outVertex.getId(), label, inVertex.getId());
@@ -195,11 +179,7 @@ public class PersistentGraph implements Graph {
     public Edge getEdge(String id) {
         ResultSet rs = null;
         try {
-            rs = stmt.executeQuery("SELECT * FROM edge WHERE id=" + id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        try {
+            rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE id=" + id);
             if (rs.next())
             {
                 return (Edge) new PersistentEdge(this, rs.getString("Vout"), rs.getString("label"), rs.getString("Vin"));
@@ -237,32 +217,20 @@ public class PersistentGraph implements Graph {
     public Collection<Edge> getEdges(String key, Object value) {
         Collection<Edge> allEdges = new ArrayList<Edge>();
         ResultSet rs;
-        if (value instanceof String) {
-            try {
-                rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = '"+value+"';");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try {
+            if (value instanceof String) {
+                    rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = '"+value+"';");
             }
-        }
-        else {
-            try {
+            else {
                 rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge WHERE json_value(property, '$."+key+"') = "+value+";");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
-        }
-        while (true)
-        {
-            try {
+            while (true)
+            {
                 if (!rs.next()) break;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
                 allEdges.add(new PersistentEdge(this, rs.getString("Vout"),rs.getString("label"), rs.getString("Vin")));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return allEdges;
     }

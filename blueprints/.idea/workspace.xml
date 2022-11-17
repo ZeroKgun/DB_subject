@@ -5,28 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4557e4a8-82f6-45ef-9a77-4c5d744b8ef8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/DBteamplay.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/newDB.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_carrotsearch_hppc_0_6_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_tinkerpop_blueprints_blueprints_core_2_6_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_core_1_8_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_configuration_commons_configuration_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_digester_commons_digester_1_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_jettison_jettison_1_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20220924.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mariadb_jdbc_mariadb_java_client_3_0_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__stax_stax_api_1_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice18.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice24.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice25.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice26.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice27.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice28.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/practice/Practice28.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentEdge.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentEdge.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentGraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentGraph.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/UnitTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/UnitTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -47,23 +65,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/DBteamplay/blueprints&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/hyuncho/smallData/blueprints",
+    "settings.editor.selected.configurable": "build.tools"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -76,12 +86,10 @@
       <workItem from="1668086422171" duration="238000" />
       <workItem from="1668086806546" duration="1265000" />
       <workItem from="1668088081295" duration="3623000" />
-      <workItem from="1668124320949" duration="18826000" />
-      <workItem from="1668654410235" duration="193000" />
-      <workItem from="1668654700335" duration="980000" />
-      <workItem from="1668655696428" duration="1651000" />
-      <workItem from="1668668863294" duration="28000" />
-      <workItem from="1668668932736" duration="1225000" />
+      <workItem from="1668124320949" duration="7052000" />
+      <workItem from="1668133194221" duration="65000" />
+      <workItem from="1668133295518" duration="2170000" />
+      <workItem from="1668670726346" duration="6031000" />
     </task>
     <servers />
   </component>
