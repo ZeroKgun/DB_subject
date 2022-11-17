@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2eff75b8-392e-4a65-b8ad-f2c40bb5c056" name="Changes" comment="" />
+    <list default="true" id="2eff75b8-392e-4a65-b8ad-f2c40bb5c056" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprints/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blueprints/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/blueprints/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +27,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/happy/IdeaProjects/DB_subject/blueprints"
+    "last_opened_file_path": "D:/DBteamplay/blueprints"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -36,6 +40,8 @@
       <updated>1668066287038</updated>
       <workItem from="1668066288997" duration="28000" />
       <workItem from="1668086382547" duration="39000" />
+      <workItem from="1668654620869" duration="48000" />
+      <workItem from="1668654680615" duration="18000" />
     </task>
     <servers />
   </component>

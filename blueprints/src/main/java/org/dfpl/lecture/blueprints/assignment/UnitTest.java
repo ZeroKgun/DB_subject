@@ -4,13 +4,12 @@ import com.tinkerpop.blueprints.revised.Direction;
 import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
-import org.dfpl.lecture.blueprints.memory.InMemoryGraph;
 
 public class UnitTest {
 	public static void main(String[] args) throws Exception {
 		String dbID = "root";
 
-		String dbPW = "1234";
+		String dbPW = "0726";
 
 		String dbName = "team";
 

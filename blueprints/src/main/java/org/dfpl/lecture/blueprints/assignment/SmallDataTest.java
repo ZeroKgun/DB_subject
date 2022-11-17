@@ -1,14 +1,13 @@
 package org.dfpl.lecture.blueprints.assignment;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.sql.SQLException;
-
 import com.tinkerpop.blueprints.revised.Direction;
 import com.tinkerpop.blueprints.revised.Edge;
 import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
-import org.dfpl.lecture.blueprints.memory.InMemoryGraph;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.sql.SQLException;
 
 public class SmallDataTest {
 
@@ -22,10 +21,11 @@ public class SmallDataTest {
 
         // 참고: 평가를 위한 데이터셋은 보다 작은 데이터셋을 활용 (예: CollegeMsg.txt, http://snap.stanford.edu/data/index.html)
         // 참고: 데이터셋 변경 가능
-        String fileName = "C:\\Users\\happy\\IdeaProjects\\DB_subject\\CollegeMsg.txt";
+        //String fileName = "C:\\Users\\happy\\IdeaProjects\\DB_subject\\CollegeMsg.txt";
+        String fileName = "D:\\DBteamplay\\CollegeMsg.txt";
         String delimiter = "\\s";
         String dbID = "root";
-        String dbPW = "1234";
+        String dbPW = "0726";
         String dbName = "team";
 
         BufferedReader r = new BufferedReader(new FileReader(fileName));

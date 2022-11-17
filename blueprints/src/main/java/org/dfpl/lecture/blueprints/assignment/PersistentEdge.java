@@ -1,18 +1,14 @@
 package org.dfpl.lecture.blueprints.assignment;
 
 
-
 import com.tinkerpop.blueprints.revised.Direction;
 import com.tinkerpop.blueprints.revised.Edge;
-import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
 import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Set;
 
 public class PersistentEdge implements Edge {
@@ -132,25 +128,27 @@ public class PersistentEdge implements Edge {
     }
 
     @Override
-    public void setProperty(String key, Object value) throws SQLException {
-        ResultSet rs;
-        rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '"+this.id +"'");
-
-        while(rs.next())
-        {
-            if(rs.getString(5) == null) {
-                if(value instanceof String)
-                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = '" + this.id + "'");
-                else
-                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "'," + value + ") WHERE id = '" + this.id + "'");
+    public void setProperty(String key, Object value)  {
+        try {
+            ResultSet rs;
+            rs = g.stmt.executeQuery("SELECT * FROM edge WHERE id = '"+this.id +"'");
+            while (rs.next()) {
+                if (rs.getString(5) == null) {
+                    if (value instanceof String)
+                        g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = '" + this.id + "'");
+                    else
+                        g.stmt.executeUpdate("UPDATE edge SET property = JSON_OBJECT('" + key + "'," + value + ") WHERE id = '" + this.id + "'");
+                } else {
+                    if (value instanceof String)
+                        g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$." + key + "','" + value + "') WHERE id = '" + this.id + "'");
+                    else
+                        g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$." + key + "'," + value + ") WHERE id = '" + this.id + "'");
+                }
+                break;
             }
-            else {
-                if(value instanceof String)
-                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$."+key+"','"+value+"') WHERE id = '" + this.id + "'");
-                else
-                    g.stmt.executeUpdate("UPDATE edge SET property = JSON_SET(property,'$."+key+"',"+value+") WHERE id = '" + this.id + "'");
-            }
-            break;
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

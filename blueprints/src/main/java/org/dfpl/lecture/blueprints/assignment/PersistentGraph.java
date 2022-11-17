@@ -27,7 +27,6 @@ public class PersistentGraph implements Graph {
         stmt.executeUpdate("CREATE OR REPLACE TABLE vertex(id VARCHAR(40) UNIQUE , property JSON)");
         stmt.executeUpdate("CREATE OR REPLACE TABLE edge(id VARCHAR(40) UNIQUE, Vout VARCHAR(20), Vin VARCHAR(20), label VARCHAR(20), property JSON)");
 
-
     }
 
     @Override

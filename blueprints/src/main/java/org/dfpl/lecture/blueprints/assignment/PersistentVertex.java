@@ -72,24 +72,27 @@ public class PersistentVertex implements Vertex {
     }
 
     @Override
-    public void setProperty(String key, Object value) throws SQLException {
+    public void setProperty(String key, Object value) {
         //s : id / o : jsonobject
-        ResultSet rs;
-        rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id ="+this.id);
-        while(rs.next())
-        {
-            if(rs.getString(2) == null) {
-                if(value instanceof String)
-                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = " + this.id);
-                else
-                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "'," + value + ") WHERE id = " + this.id);
+        try {
+            ResultSet rs;
+            rs = g.stmt.executeQuery("SELECT * FROM vertex WHERE id =" + this.id);
+            while (rs.next()) {
+                if (rs.getString(2) == null) {
+                    if (value instanceof String)
+                        g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "','" + value + "') WHERE id = " + this.id);
+                    else
+                        g.stmt.executeUpdate("UPDATE vertex SET property = JSON_OBJECT('" + key + "'," + value + ") WHERE id = " + this.id);
+                } else {
+                    if (value instanceof String)
+                        g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$." + key + "','" + value + "') WHERE id = " + this.id);
+                    else
+                        g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$." + key + "'," + value + ") WHERE id = " + this.id);
+                }
             }
-            else {
-                if(value instanceof String)
-                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$."+key+"','"+value+"') WHERE id = " + this.id);
-                else
-                    g.stmt.executeUpdate("UPDATE vertex SET property = JSON_SET(property,'$."+key+"',"+value+") WHERE id = " + this.id);
-            }
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
