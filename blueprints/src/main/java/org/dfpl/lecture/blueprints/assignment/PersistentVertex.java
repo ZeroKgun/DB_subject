@@ -159,15 +159,15 @@ public class PersistentVertex implements Vertex {
         if(direction.equals(Direction.OUT)) {
             ResultSet rs = null;
             try {
-                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vout = '" + this.id + "'");
+                rs = g.stmt.executeQuery("SELECT Vin, label FROM edge WHERE Vout = '" + this.id + "'");
                 while (rs.next()) {
-                    Vertex newVertex = new PersistentVertex(this.g, rs.getString(3));
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString(1));
                     if(labels.length == 0) {
                         newVertices.add(newVertex);
                     }
                     else {
                         for(String label:labels) {
-                            if (rs.getString(4).equals(label)) {
+                            if (rs.getString(2).equals(label)) {
                                 newVertices.add(newVertex);
                             }
                         }
@@ -181,15 +181,15 @@ public class PersistentVertex implements Vertex {
         else if (direction.equals(Direction.IN)) {
             ResultSet rs = null;
             try {
-                rs = g.stmt.executeQuery("SELECT * FROM edge WHERE Vin = '" + this.id + "'");
+                rs = g.stmt.executeQuery("SELECT Vout,label FROM edge WHERE Vin = '" + this.id + "'");
                 while (rs.next()) {
-                    Vertex newVertex = new PersistentVertex(this.g, rs.getString(2));
+                    Vertex newVertex = new PersistentVertex(this.g, rs.getString(1));
                     if(labels.length == 0) {
                         newVertices.add(newVertex);
                     }
                     else {
                         for(String label:labels) {
-                            if (rs.getString(4).equals(label)) {
+                            if (rs.getString(2).equals(label)) {
                                 newVertices.add(newVertex);
                             }
                         }
@@ -224,9 +224,9 @@ public class PersistentVertex implements Vertex {
             ResultSet rs = null;
             try {
                 if (value instanceof String)
-                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "' AND Vout = '"+ this.id +"';");
+                    rs = g.stmt.executeQuery("SELECT vin, label FROM edge WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "' AND Vout = '"+ this.id +"';");
                 else
-                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = " + value + " AND Vout = '"+ this.id +"';");
+                    rs = g.stmt.executeQuery("SELECT vin, label FROM edge WHERE JSON_VALUE(property, '$." + key + "') = " + value + " AND Vout = '"+ this.id +"';");
                 while (rs.next()) {
                     Vertex newVertex = new PersistentVertex(this.g, rs.getString("vin"));
                     if(labels.length == 0) {
@@ -249,9 +249,9 @@ public class PersistentVertex implements Vertex {
             ResultSet rs = null;
             try {
                 if (value instanceof String)
-                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "' AND Vin = '"+id+"';");
+                    rs = g.stmt.executeQuery("SELECT vout, label FROM edge WHERE JSON_VALUE(property, '$." + key + "') = '" + value + "' AND Vin = '"+id+"';");
                 else
-                    rs = g.stmt.executeQuery("SELECT * FROM edge WHERE JSON_VALUE(property, '$." + key + "') = " + value + " AND Vin = '"+id+"';");
+                    rs = g.stmt.executeQuery("SELECT vout, label FROM edge WHERE JSON_VALUE(property, '$." + key + "') = " + value + " AND Vin = '"+id+"';");
                 while (rs.next()) {
                     Vertex newVertex = new PersistentVertex(this.g, rs.getString("vout"));
                     if(labels.length == 0) {

@@ -36,7 +36,7 @@ public class PersistentGraph implements Graph {
         }
 
         try {
-            rs = stmt.executeQuery("SELECT COUNT(*) FROM vertex WHERE id = '" + id+"'");
+            rs = stmt.executeQuery("SELECT COUNT(id) FROM vertex WHERE id = '" + id+"'");
             int cnt = 0;
 
             while(rs.next()) {
@@ -136,7 +136,7 @@ public class PersistentGraph implements Graph {
         String edge_id = outVertex.getId() + "|" + label + "|" + inVertex.getId();
 
         try {
-            rs = stmt.executeQuery("SELECT COUNT(*) FROM edge WHERE id = '" + edge_id + "'");
+            rs = stmt.executeQuery("SELECT COUNT(id) FROM edge WHERE id = '" + edge_id + "'");
 
             while(true) {
                 if (!rs.next()) break;
