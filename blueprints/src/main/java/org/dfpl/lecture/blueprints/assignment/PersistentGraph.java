@@ -60,7 +60,7 @@ public class PersistentGraph implements Graph {
     public Vertex getVertex(String id) {
 
         try {
-            rs = stmt.executeQuery("SELECT id FROM vertex WHERE id = " + id + ";");
+            rs = stmt.executeQuery("SELECT id FROM vertex WHERE id = '" + id + "';");
             Vertex newVertex = null;
 
             while(rs.next()) {

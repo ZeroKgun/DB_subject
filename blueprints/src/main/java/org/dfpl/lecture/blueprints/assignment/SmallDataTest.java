@@ -22,10 +22,10 @@ public class SmallDataTest {
         // 참고: 평가를 위한 데이터셋은 보다 작은 데이터셋을 활용 (예: CollegeMsg.txt, http://snap.stanford.edu/data/index.html)
         // 참고: 데이터셋 변경 가능
         //String fileName = "C:\\Users\\happy\\IdeaProjects\\DB_subject\\CollegeMsg.txt";
-        String fileName = "D:\\DBteamplay\\CollegeMsg.txt";
+        String fileName = "/Users/hyuncho/smallData/CollegeMsg.txt";
         String delimiter = "\\s";
         String dbID = "root";
-        String dbPW = "0726";
+        String dbPW = "aqua3285369";
         String dbName = "team";
 
         BufferedReader r = new BufferedReader(new FileReader(fileName));
@@ -46,10 +46,12 @@ public class SmallDataTest {
                 System.out.println(cnt + " lines read...");
             }
             String[] arr = line.split(delimiter);
-            Vertex v1 = g.addVertex(arr[0]);
-            int v1Int = Integer.parseInt(v1.getId());
-            Vertex v2 = g.addVertex(arr[1]);
-            int v2Int = Integer.parseInt(v2.getId());
+            String v1str = "s"+arr[0];
+            String v2str = "s"+arr[1];
+            Vertex v1 = g.addVertex(v1str);
+            int v1Int = Integer.parseInt(arr[0]);
+            Vertex v2 = g.addVertex(v2str);
+            int v2Int = Integer.parseInt(arr[1]);
             Edge e12 = g.addEdge(v1, v2, "l");
             e12.setProperty(isEvenTag, ((v1Int + v2Int) % 2 == 0));
             e12.setProperty(addTag, v1Int + v2Int);
