@@ -208,7 +208,7 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Collection<Vertex> getTwoHopVertices(Direction direction, String... labels) throws IllegalArgumentException {
-        Collection<Vertex> AllVertices = new HashSet<Vertex>();
+        Collection<Vertex> AllVertices = new ArrayList<Vertex>();
         for (Vertex vhop1 : getVertices(direction, labels)){
             for (Vertex vhop2 : vhop1.getVertices(direction, labels))
                 for (Vertex vhop3 : vhop2.getVertices(direction, labels))
@@ -285,9 +285,14 @@ public class PersistentVertex implements Vertex {
         return id.equals(((PersistentVertex) obj).getId());
     }
 
+
     public int hashCode(){
-        return Objects.hash(this.id);
+        int hash = 7;
+        hash = 31 * hash + (int) id.hashCode();
+        return hash;
     }
+
+
 
 }
 

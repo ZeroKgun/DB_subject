@@ -163,6 +163,9 @@ public class PersistentEdge implements Edge {
     }
 
     public int hashCode(){
-        return Objects.hash(this.id);
+        int hash = 7;
+        hash = 31 * hash + (int) id.hashCode();
+        return hash;
     }
+
 }

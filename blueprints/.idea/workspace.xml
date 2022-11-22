@@ -6,16 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4557e4a8-82f6-45ef-9a77-4c5d744b8ef8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Vertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/tinkerpop/blueprints/revised/Vertex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentEdge.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentGraph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/PersistentVertex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/SmallDataTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/dfpl/lecture/blueprints/assignment/UnitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentEdge.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentEdge.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentGraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentGraph.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/PersistentVertex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/SmallDataTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/UnitTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/dfpl/lecture/blueprints/assignment/UnitTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Vertex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/tinkerpop/blueprints/revised/Vertex.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,19 +35,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/hyuncho/smallData/blueprints",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "build.tools"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/hyuncho/smallData/blueprints&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;build.tools&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -70,6 +64,7 @@
       <workItem from="1668133194221" duration="65000" />
       <workItem from="1668133295518" duration="2170000" />
       <workItem from="1668670726346" duration="6031000" />
+      <workItem from="1669098649702" duration="4562000" />
     </task>
     <servers />
   </component>
