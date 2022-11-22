@@ -9,7 +9,7 @@ public class UnitTest {
 	public static void main(String[] args) throws Exception {
 		String dbID = "root";
 
-		String dbPW = "aqua3285369";
+		String dbPW = "0726";
 
 		String dbName = "team";
 

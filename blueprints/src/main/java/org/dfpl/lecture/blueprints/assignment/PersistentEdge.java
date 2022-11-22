@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Set;
 
 public class PersistentEdge implements Edge {
@@ -159,5 +160,9 @@ public class PersistentEdge implements Edge {
     @Override
     public boolean equals(Object obj) {
         return (this.getId().equals(((Edge)obj).getId()));
+    }
+
+    public int hashCode(){
+        return Objects.hash(this.id);
     }
 }

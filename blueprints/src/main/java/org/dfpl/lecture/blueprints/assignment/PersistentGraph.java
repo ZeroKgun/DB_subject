@@ -5,7 +5,7 @@ import com.tinkerpop.blueprints.revised.Graph;
 import com.tinkerpop.blueprints.revised.Vertex;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Collection;
 
 public class PersistentGraph implements Graph {
@@ -82,7 +82,7 @@ public class PersistentGraph implements Graph {
 
     @Override
     public Collection<Vertex> getVertices() {
-        ArrayList<Vertex> newVertices = new ArrayList<>();
+        HashSet<Vertex> newVertices = new HashSet<>();
 
         try {
             rs = stmt.executeQuery("SELECT id FROM vertex;");
@@ -101,7 +101,7 @@ public class PersistentGraph implements Graph {
 
     @Override
     public Collection<Vertex> getVertices(String key, Object value) {
-        ArrayList<Vertex> newVertices = new ArrayList<>();
+        HashSet<Vertex> newVertices = new HashSet<>();
 
         try {
             if (value instanceof String)
@@ -198,7 +198,7 @@ public class PersistentGraph implements Graph {
 
     @Override
     public Collection<Edge> getEdges() {
-        Collection<Edge> allEdges = new ArrayList<Edge>();
+        Collection<Edge> allEdges = new HashSet<Edge>();
         ResultSet rs = null;
         try {
             rs = stmt.executeQuery("SELECT Vout, label, Vin FROM edge");
@@ -215,7 +215,7 @@ public class PersistentGraph implements Graph {
 
     @Override
     public Collection<Edge> getEdges(String key, Object value) {
-        Collection<Edge> allEdges = new ArrayList<Edge>();
+        Collection<Edge> allEdges = new HashSet<Edge>();
         ResultSet rs;
         try {
             if (value instanceof String) {

@@ -8,10 +8,8 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ArrayList;
-import java.util.Set;
+import java.util.*;
+import java.util.HashSet;
 
 public class PersistentVertex implements Vertex {
     private PersistentGraph g;
@@ -103,11 +101,11 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Collection<Edge> getEdges(Direction direction, String... labels) throws IllegalArgumentException {
-        Collection<Edge> newEdges = new ArrayList<>();
+        Collection<Edge> newEdges = new HashSet<Edge>();
         if(direction.equals(Direction.OUT)) {
             ResultSet rs = null;
             try {
-                rs = g.stmt.executeQuery("SELECT vin,vout,label FROM edge WHERE Vout = '" + this.id + "'");
+                rs = g.stmt.executeQuery("SELECT vout,vin,label FROM edge WHERE Vout = '" + this.id + "'");
                 while (rs.next()) {
                     Edge newEdge = new PersistentEdge(this.g, rs.getString("vout"), rs.getString("label"), rs.getString("vin"));
                     if(labels.length == 0) {
@@ -129,7 +127,7 @@ public class PersistentVertex implements Vertex {
         else if (direction.equals(Direction.IN)) {
             ResultSet rs = null;
             try {
-                rs = g.stmt.executeQuery("SELECT vin,vout,label FROM edge WHERE Vin = '" + this.id + "'");
+                rs = g.stmt.executeQuery("SELECT vout,vin,label FROM edge WHERE Vin = '" + this.id + "'");
                 while (rs.next()) {
                     Edge newEdge = new PersistentEdge(this.g, rs.getString("vout"), rs.getString("label"), rs.getString("vin"));
                     if(labels.length == 0) {
@@ -157,7 +155,7 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Collection<Vertex> getVertices(Direction direction, String... labels) throws IllegalArgumentException {
-        Collection<Vertex> newVertices = new ArrayList<>();
+        Collection<Vertex> newVertices = new HashSet<>();
         if(direction.equals(Direction.OUT)) {
             ResultSet rs = null;
             try {
@@ -210,7 +208,7 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Collection<Vertex> getTwoHopVertices(Direction direction, String... labels) throws IllegalArgumentException {
-        Collection<Vertex> AllVertices = new ArrayList<Vertex>();
+        Collection<Vertex> AllVertices = new HashSet<Vertex>();
         for (Vertex vhop1 : getVertices(direction, labels)){
             for (Vertex vhop2 : vhop1.getVertices(direction, labels))
                 for (Vertex vhop3 : vhop2.getVertices(direction, labels))
@@ -221,7 +219,7 @@ public class PersistentVertex implements Vertex {
 
     @Override
     public Collection<Vertex> getVertices(Direction direction, String key, Object value, String... labels) throws IllegalArgumentException {
-        Collection<Vertex> newVertices = new ArrayList<>();
+        Collection<Vertex> newVertices = new HashSet<>();
         if(direction.equals(Direction.OUT)) {
             ResultSet rs = null;
             try {
@@ -285,6 +283,10 @@ public class PersistentVertex implements Vertex {
     @Override
     public boolean equals(Object obj) {
         return id.equals(((PersistentVertex) obj).getId());
+    }
+
+    public int hashCode(){
+        return Objects.hash(this.id);
     }
 
 }
